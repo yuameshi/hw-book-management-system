@@ -11,7 +11,7 @@ import java.awt.Font;
 public class AddBook {
 	public AddBook() {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
-		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
+		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 14);
 		final Color WHITE = Color.decode("#ffffff");
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
