@@ -11,6 +11,7 @@ import java.awt.Font;
 public class AddBook {
 	public AddBook() {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
+		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
 		final Color WHITE = Color.decode("#ffffff");
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
@@ -135,7 +136,7 @@ public class AddBook {
 		saveBtn.setBounds(230, 280, 120, 30);
 		saveBtn.setBackground(WHITE);
 		saveBtn.setForeground(BLACK);
-		saveBtn.setFont(new Font(null, Font.PLAIN, 14));
+		saveBtn.setFont(DEFAULT_FONT_14);
 		saveBtn.setFocusPainted(false);
 		panel.add(saveBtn);
 
@@ -143,7 +144,7 @@ public class AddBook {
 		closeBtn.setBounds(400, 280, 120, 30);
 		closeBtn.setBackground(WHITE);
 		closeBtn.setForeground(BLACK);
-		closeBtn.setFont(new Font(null, Font.PLAIN, 14));
+		closeBtn.setFont(DEFAULT_FONT_14);
 		closeBtn.setFocusPainted(false);
 		panel.add(closeBtn);
 

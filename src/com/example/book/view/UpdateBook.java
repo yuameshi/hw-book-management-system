@@ -11,6 +11,7 @@ import java.awt.Font;
 public class UpdateBook {
 	public UpdateBook() {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
+		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
 		final Color WHITE = Color.decode("#ffffff");
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
@@ -146,7 +147,7 @@ public class UpdateBook {
 		queryBtn.setBounds(460, 300, 80, 30);
 		queryBtn.setBackground(WHITE);
 		queryBtn.setForeground(BLACK);
-		queryBtn.setFont(new Font(null, Font.PLAIN, 14));
+		queryBtn.setFont(DEFAULT_FONT_14);
 		queryBtn.setFocusPainted(false);
 		panel.add(queryBtn);
 
@@ -154,7 +155,7 @@ public class UpdateBook {
 		saveBtn.setBounds(200, 350, 100, 30);
 		saveBtn.setBackground(WHITE);
 		saveBtn.setForeground(BLACK);
-		saveBtn.setFont(new Font(null, Font.PLAIN, 14));
+		saveBtn.setFont(DEFAULT_FONT_14);
 		saveBtn.setFocusPainted(false);
 		panel.add(saveBtn);
 
@@ -162,7 +163,7 @@ public class UpdateBook {
 		closeBtn.setBounds(320, 350, 100, 30);
 		closeBtn.setBackground(WHITE);
 		closeBtn.setForeground(BLACK);
-		closeBtn.setFont(new Font(null, Font.PLAIN, 14));
+		closeBtn.setFont(DEFAULT_FONT_14);
 		closeBtn.setFocusPainted(false);
 		panel.add(closeBtn);
 
@@ -170,7 +171,7 @@ public class UpdateBook {
 		deleteBtn.setBounds(440, 350, 100, 30);
 		deleteBtn.setBackground(WHITE);
 		deleteBtn.setForeground(BLACK);
-		deleteBtn.setFont(new Font(null, Font.PLAIN, 14));
+		deleteBtn.setFont(DEFAULT_FONT_14);
 		deleteBtn.setFocusPainted(false);
 		panel.add(deleteBtn);
 
