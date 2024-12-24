@@ -45,6 +45,7 @@ public class LoginDialog {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 250);
 		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.decode("#f0f0f0"));

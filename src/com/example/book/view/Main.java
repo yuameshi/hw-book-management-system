@@ -25,6 +25,7 @@ public class Main {
 		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

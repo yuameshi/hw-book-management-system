@@ -41,6 +41,7 @@ public class ResetPassword {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 250);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

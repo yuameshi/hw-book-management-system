@@ -49,6 +49,7 @@ public class UpdateBook {
 		frame = new JFrame("添加图书");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(750, 450);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);

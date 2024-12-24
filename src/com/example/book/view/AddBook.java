@@ -40,6 +40,7 @@ public class AddBook {
 
 		frame = new JFrame("添加图书");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.setSize(750, 400);
 		frame.setLocationRelativeTo(null);
 		JPanel panel = new JPanel();

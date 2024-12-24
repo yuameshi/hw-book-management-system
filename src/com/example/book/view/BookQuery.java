@@ -37,6 +37,7 @@ public class BookQuery {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(820, 800);
 		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.decode("#eeeeee"));
