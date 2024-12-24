@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 public class MainFrame {
 	private static JFrame frame;
 	public boolean isAdmin = false;
+	private static JMenu basicManageMenu;
+	private JMenu borrowMenu;
 
 	public MainFrame(Runnable closeHandler) {
 		frame = new JFrame("图书管理系统");
@@ -24,10 +26,14 @@ public class MainFrame {
 		panel.setBackground(Color.decode("#ffffff"));
 
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.add(getBasicManagement());
-		menuBar.add(getBorrowManagement());
-		menuBar.add(getQueryManagement());
-		menuBar.add(getSystemManagement(closeHandler));
+		basicManageMenu = getBasicManagement();
+		borrowMenu = getBorrowManagement();
+		JMenu queryManageMenu = getQueryManagement();
+		JMenu systemManageMenu = getSystemManagement(closeHandler);
+		menuBar.add(basicManageMenu);
+		menuBar.add(borrowMenu);
+		menuBar.add(queryManageMenu);
+		menuBar.add(systemManageMenu);
 		frame.setJMenuBar(menuBar);
 
 		frame.add(panel);
@@ -115,4 +121,8 @@ public class MainFrame {
 		frame.setVisible(false);
 	}
 
+	public void toggleAdmin(boolean isAdmin) {
+		basicManageMenu.setEnabled(isAdmin);
+		borrowMenu.setEnabled(isAdmin);
+	}
 }

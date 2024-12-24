@@ -1,8 +1,8 @@
 import com.example.book.controller.Book;
+import com.example.book.controller.UserInfo;
 import com.example.book.db.Initialization;
 import com.example.book.db.books.Add;
 import com.example.book.db.user.Login;
-import com.example.book.db.user.Login.UserInfo;
 import com.example.book.view.MainFrame;
 import com.example.book.view.AddBook;
 import com.example.book.view.LoginDialog;
@@ -26,8 +26,7 @@ public class App {
 				user = retUser;
 				LoginDialog.hidePasswordError();
 				LoginDialog.close();
-				if (user.isAdmin)
-					mainFrame.isAdmin = true;
+				mainFrame.toggleAdmin(user.isAdmin);
 				mainFrame.show();
 			}
 		} catch (Exception e) {

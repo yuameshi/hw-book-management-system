@@ -19,7 +19,7 @@ public class Login {
 			UserInfo info = new UserInfo(
 					result.getInt("id"),
 					result.getString("username"),
-					result.getString("is_admin") == "y");
+					result.getString("is_admin").equals("y"));
 			Utils.CloseConnection(result, statement, connection);
 			return info;
 		} else {
