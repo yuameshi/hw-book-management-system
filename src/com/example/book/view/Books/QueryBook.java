@@ -118,6 +118,25 @@ public class QueryBook {
 
 	private void query() {
 		try {
+			if (bookNameField.getText().isEmpty() && authorField.getText().isEmpty() && pubField.getText().isEmpty()) {
+				Book[] results = Query.getAllBooks();
+				String[][] tableResults = new String[results.length][];
+				for (int i = 0; i < results.length; i++) {
+					tableResults[i] = new String[] {
+							results[i].getId(),
+							results[i].getBookName(),
+							results[i].getCategory(),
+							results[i].getAuthor(),
+							results[i].getTranslator(),
+							results[i].getPublisher(),
+							results[i].getPublishTime(),
+							String.valueOf(results[i].getPrice()),
+							String.valueOf(results[i].getStock())
+					};
+				}
+				table.setModel(new DefaultTableModel(tableResults, columns));
+				return;
+			}
 			Book[] resultsByBookName = {};
 			Book[] resultsByAuthor = {};
 			Book[] resultsByPublisher = {};
