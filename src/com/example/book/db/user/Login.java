@@ -4,21 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import com.example.book.utils.HashPassword;
-
+import com.example.book.controller.UserInfo;
 import com.example.book.db.Utils;
 
 public class Login {
-	public static class UserInfo {
-		public int uid;
-		public String username;
-		public boolean isAdmin;
-
-		public UserInfo(int uid, String uname, boolean isAdmin) {
-			this.uid = uid;
-			this.username = uname;
-			this.isAdmin = isAdmin;
-		}
-	}
 
 	public static UserInfo login(String username, String password) throws Exception {
 		Connection connection = Utils.getConnection();
