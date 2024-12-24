@@ -16,6 +16,7 @@ public class LoginDialog {
 	private static JFrame frame = new JFrame("登录");
 	private static JTextField unameField;
 	private static JPasswordField passwordField;
+	private static JLabel errorMsg;
 
 	public class LoginObject {
 		String username;
@@ -74,8 +75,15 @@ public class LoginDialog {
 		passwordField.setForeground(GRAY);
 		panel.add(passwordField);
 
+		errorMsg = new JLabel("账号或密码错误");
+		errorMsg.setBounds(100, 110, 200, 40);
+		errorMsg.setFont(new Font(null, Font.ITALIC, 20));
+		errorMsg.setForeground(Color.decode("#f00000"));
+		errorMsg.setVisible(false);
+		panel.add(errorMsg);
+
 		JButton loginBtn = new JButton("登录");
-		loginBtn.setBounds(125, 130, 110, 45);
+		loginBtn.setBounds(125, 150, 110, 45);
 		loginBtn.setFont(new Font(null, Font.PLAIN, 20));
 		loginBtn.setBackground(WHITE);
 		loginBtn.setForeground(BLACK);
@@ -110,5 +118,13 @@ public class LoginDialog {
 	public void reset() {
 		unameField.setText("");
 		passwordField.setText("");
+	}
+
+	public void showPasswordError() {
+		errorMsg.setVisible(true);
+	}
+
+	public void hidePasswordError() {
+		errorMsg.setVisible(false);
 	}
 }
