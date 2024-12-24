@@ -5,9 +5,9 @@ import com.example.book.db.user.ResetPasswordDb;
 import com.example.book.utils.PortTester;
 import com.example.book.view.Main;
 import com.example.book.view.ResetPassword;
-import com.example.book.view.UpdateBook;
-import com.example.book.view.AddBook;
-import com.example.book.view.BookQuery;
+import com.example.book.view.Books.AddBook;
+import com.example.book.view.Books.QueryBook;
+import com.example.book.view.Books.UpdateBook;
 import com.example.book.view.LoginDialog;
 import com.example.book.view.LoginDialog.LoginObject;
 import com.example.book.view.ResetPassword.ResetPasswordCallbackParam;
@@ -21,7 +21,7 @@ public class App {
 	private static LoginDialog LoginDialog;
 	private static AddBook AddBookFrame;
 	private static UpdateBook UpdateBookFrame;
-	private static BookQuery QueryBookFrame;
+	private static QueryBook QueryBookFrame;
 	private static Main MainFrame;
 	private static ResetPassword ResetPasswordDialog;
 
@@ -105,7 +105,7 @@ public class App {
 				LoginDialog.show();
 				AddBookFrame = new AddBook(App::handleOpenMain);
 				UpdateBookFrame = new UpdateBook(App::handleOpenMain);
-				QueryBookFrame = new BookQuery(App::handleOpenMain);
+				QueryBookFrame = new QueryBook(App::handleOpenMain);
 			}
 		} catch (Exception e) {
 			UnexpectedError.show(App::handleExitApp);

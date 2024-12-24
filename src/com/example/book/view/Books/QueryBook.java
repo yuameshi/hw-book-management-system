@@ -1,4 +1,4 @@
-package com.example.book.view;
+package com.example.book.view.Books;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
 
-public class BookQuery {
+public class QueryBook {
 	private JFrame frame;
 	private JTextField bookNameField;
 	private JTextField authorField;
@@ -26,7 +26,7 @@ public class BookQuery {
 	String[] columns = { "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" };
 	private String[][] queryResults = {};
 
-	public BookQuery(Runnable goMainHandler) {
+	public QueryBook(Runnable goMainHandler) {
 		final Font DEFAULT_FONT_18 = new Font(null, Font.PLAIN, 18);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
 		final Color WHITE = Color.decode("#ffffff");
