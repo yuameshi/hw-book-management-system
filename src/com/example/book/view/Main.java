@@ -10,13 +10,13 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainFrame {
+public class Main {
 	private static JFrame frame;
 	public boolean isAdmin = false;
 	private static JMenu basicManageMenu;
 	private JMenu borrowMenu;
 
-	public MainFrame(Runnable resetPasswordTrigger, Runnable closeHandler) {
+	public Main(Runnable resetPasswordTrigger, Runnable closeHandler) {
 		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);

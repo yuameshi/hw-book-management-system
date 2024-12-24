@@ -3,7 +3,7 @@ import com.example.book.db.Initialization;
 import com.example.book.db.user.Login;
 import com.example.book.db.user.ResetPasswordDb;
 import com.example.book.utils.PortTester;
-import com.example.book.view.MainFrame;
+import com.example.book.view.Main;
 import com.example.book.view.ResetPassword;
 import com.example.book.view.UpdateBook;
 import com.example.book.view.AddBook;
@@ -22,7 +22,7 @@ public class App {
 	private static AddBook AddBookFrame;
 	private static UpdateBook UpdateBookFrame;
 	private static BookQuery QueryBookFrame;
-	private static MainFrame mainFrame;
+	private static Main MainFrame;
 	private static ResetPassword ResetPasswordDialog;
 
 	private static void handleLogin(LoginObject loginObject) {
@@ -35,8 +35,8 @@ public class App {
 				user = retUser;
 				LoginDialog.hidePasswordError();
 				LoginDialog.close();
-				mainFrame.toggleAdmin(user.isAdmin);
-				mainFrame.show();
+				MainFrame.toggleAdmin(user.isAdmin);
+				MainFrame.show();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class App {
 	}
 
 	private static void handleResetPassword() {
-		mainFrame.hide();
+		MainFrame.hide();
 		ResetPasswordDialog.show(user.uid);
 	}
 
@@ -55,16 +55,16 @@ public class App {
 			e.printStackTrace();
 		}
 		ResetPasswordDialog.hide();
-		mainFrame.show();
+		MainFrame.show();
 	}
 
 	private static void NavigateResetPasswordToMain() {
 		ResetPasswordDialog.hide();
-		mainFrame.show();
+		MainFrame.show();
 	}
 
 	private static void handleExitSystem() {
-		mainFrame.hide();
+		MainFrame.hide();
 		user = null;
 		LoginDialog.reset();
 		LoginDialog.show();
@@ -85,7 +85,7 @@ public class App {
 				LoginDialog = new LoginDialog(App::handleLogin);
 				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback,
 						App::NavigateResetPasswordToMain);
-				mainFrame = new MainFrame(App::handleResetPassword, App::handleExitSystem);
+				MainFrame = new Main(App::handleResetPassword, App::handleExitSystem);
 				LoginDialog.show();
 				AddBookFrame = new AddBook();
 				UpdateBookFrame = new UpdateBook();
