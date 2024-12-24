@@ -63,13 +63,9 @@ public class App {
 		LoginDialog.show();
 	}
 
-	private static void handleCloseApp() {
-		System.exit(0);
-	}
-
 	public static void main(String[] args) throws Exception {
 		Initialization.SmartCreate();
-		LoginDialog = new LoginDialog(App::handleLogin, App::handleCloseApp);
+		LoginDialog = new LoginDialog(App::handleLogin);
 		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::NavigateResetPasswordToMain);
 		LoginDialog.show();
 		// Book book = new Book.BookBuilder("11")

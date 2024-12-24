@@ -36,7 +36,7 @@ public class LoginDialog {
 		}
 	}
 
-	public LoginDialog(Consumer<LoginObject> loginHandler, Runnable closeHandler) {
+	public LoginDialog(Consumer<LoginObject> loginHandler) {
 		final Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
 		final Color WHITE = Color.decode("#ffffff");
 		final Color BLACK = Color.decode("#1b1b1b");
