@@ -2,9 +2,12 @@ import com.example.book.controller.UserInfo;
 import com.example.book.db.Initialization;
 import com.example.book.db.user.Login;
 import com.example.book.db.user.ResetPasswordDb;
+import com.example.book.utils.PortTester;
 import com.example.book.view.MainFrame;
 import com.example.book.view.ResetPassword;
+import com.example.book.view.UpdateBook;
 import com.example.book.view.AddBook;
+import com.example.book.view.BookQuery;
 import com.example.book.view.LoginDialog;
 import com.example.book.view.LoginDialog.LoginObject;
 import com.example.book.view.ResetPassword.ResetPasswordCallbackParam;
@@ -15,6 +18,8 @@ public class App {
 
 	private static LoginDialog LoginDialog;
 	private static AddBook AddBookFrame;
+	private static UpdateBook UpdateBookFrame;
+	private static BookQuery QueryBookFrame;
 	private static MainFrame mainFrame;
 	private static ResetPassword ResetPasswordDialog;
 
@@ -64,17 +69,23 @@ public class App {
 	}
 
 	public static void main(String[] args) throws Exception {
+		try {
+			PortTester tester = new PortTester();
+			if (!tester.isPortOpen("127.0.0.1", 3306)) {
+				System.out.println("MySQL is not running");
+				System.exit(1);
+			}
+		} catch (Exception e) {
+			System.out.println("MySQL is not running");
+			System.exit(1);
+		}
 		Initialization.SmartCreate();
 		LoginDialog = new LoginDialog(App::handleLogin);
 		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::NavigateResetPasswordToMain);
-		LoginDialog.show();
-		// Book book = new Book.BookBuilder("11")
-		// .withName("name")
-		// .withAuthor("author")
-		// .build();
-		// ;
-		// Add.add(book);
-		AddBookFrame = new AddBook();
 		mainFrame = new MainFrame(App::handleResetPassword, App::handleExitSystem);
+		LoginDialog.show();
+		AddBookFrame = new AddBook();
+		UpdateBookFrame = new UpdateBook();
+		QueryBookFrame = new BookQuery();
 	}
 }
