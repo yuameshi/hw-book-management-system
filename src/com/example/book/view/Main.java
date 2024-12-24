@@ -18,7 +18,9 @@ public class Main {
 	private static JMenu basicManageMenu;
 	private JMenu borrowMenu;
 
-	public Main(Runnable openAddBookFrame, Runnable resetPasswordTrigger, Runnable closeHandler) {
+	public Main(
+			Runnable openAddBookFrame, Runnable openUpdateBookFrame,
+			Runnable resetPasswordTrigger, Runnable closeHandler) {
 		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);
@@ -28,7 +30,7 @@ public class Main {
 		panel.setBackground(Color.decode("#ffffff"));
 
 		JMenuBar menuBar = new JMenuBar();
-		basicManageMenu = getBasicManagement(openAddBookFrame);
+		basicManageMenu = getBasicManagement(openAddBookFrame, openUpdateBookFrame);
 		borrowMenu = getBorrowManagement();
 		JMenu queryManageMenu = getQueryManagement();
 		JMenu systemManageMenu = getSystemManagement(resetPasswordTrigger, closeHandler);
@@ -41,7 +43,8 @@ public class Main {
 		frame.add(panel);
 	}
 
-	private JMenu getBasicManagement(Runnable openAddBookFrame) {
+	private JMenu getBasicManagement(
+			Runnable openAddBookFrame, Runnable openUpdateBookFrame) {
 		JMenu basicManageMenu = new JMenu("基础维护");
 		basicManageMenu.setEnabled(isAdmin);
 
@@ -55,6 +58,12 @@ public class Main {
 		});
 		bookManageMenu.add(addBookItem);
 		JMenuItem updateBookItem = new JMenuItem("修改/删除图书");
+		updateBookItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openUpdateBookFrame.run();
+			}
+		});
 		bookManageMenu.add(updateBookItem);
 
 		JMenu readerManageMenu = new JMenu("读者维护");

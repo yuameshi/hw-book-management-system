@@ -99,11 +99,11 @@ public class App {
 				LoginDialog = new LoginDialog(App::handleLogin);
 				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleOpenMain);
 				MainFrame = new Main(
-						App::openAddBookFrame,
+						App::openAddBookFrame, App::openUpdateBookFrame,
 						App::openResetPasswordFrame, App::handleExitSystem);
 				LoginDialog.show();
 				AddBookFrame = new AddBook(App::handleOpenMain);
-				UpdateBookFrame = new UpdateBook();
+				UpdateBookFrame = new UpdateBook(App::handleOpenMain);
 				QueryBookFrame = new BookQuery();
 			}
 		} catch (Exception e) {
