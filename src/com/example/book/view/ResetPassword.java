@@ -33,7 +33,7 @@ public class ResetPassword {
 		}
 	}
 
-	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable backHandler) {
+	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable goMain) {
 		Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
 		Color WHITE = Color.decode("#ffffff");
 		Color BLACK = Color.decode("#1b1b1b");
@@ -103,7 +103,8 @@ public class ResetPassword {
 		goBack.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				backHandler.run();
+				goMain.run();
+				hide();
 			}
 		});
 		panel.add(goBack);

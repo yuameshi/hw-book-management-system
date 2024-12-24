@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class UpdateBook {
+	JFrame frame;
+
 	public UpdateBook() {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 14);
@@ -16,7 +18,7 @@ public class UpdateBook {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
-		JFrame frame = new JFrame("添加图书");
+		frame = new JFrame("添加图书");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(750, 450);
 		frame.setLocationRelativeTo(null);
@@ -176,5 +178,13 @@ public class UpdateBook {
 		panel.add(deleteBtn);
 
 		frame.add(panel);
+	}
+
+	public void show() {
+		frame.setVisible(true);
+	}
+
+	public void hide() {
+		frame.setVisible(false);
 	}
 }

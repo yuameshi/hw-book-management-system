@@ -58,8 +58,7 @@ public class App {
 		MainFrame.show();
 	}
 
-	private static void NavigateResetPasswordToMain() {
-		ResetPasswordDialog.hide();
+	private static void handleOpenMain() {
 		MainFrame.show();
 	}
 
@@ -75,6 +74,26 @@ public class App {
 		System.exit(status);
 	}
 
+	private static void handleOpenAddBook() {
+		MainFrame.hide();
+		AddBookFrame.show();
+	}
+
+	private static void handleOpenUpdateBook() {
+		MainFrame.hide();
+		UpdateBookFrame.show();
+	}
+
+	private static void handleOpenQueryBook() {
+		MainFrame.hide();
+		QueryBookFrame.show();
+	}
+
+	private static void handleExitAddBook() {
+		AddBookFrame.hide();
+		MainFrame.show();
+	}
+
 	public static void main(String[] args) throws Exception {
 		try {
 			PortTester tester = new PortTester();
@@ -83,8 +102,7 @@ public class App {
 			} else {
 				Initialization.SmartCreate();
 				LoginDialog = new LoginDialog(App::handleLogin);
-				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback,
-						App::NavigateResetPasswordToMain);
+				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleOpenMain);
 				MainFrame = new Main(App::handleResetPassword, App::handleExitSystem);
 				LoginDialog.show();
 				AddBookFrame = new AddBook();

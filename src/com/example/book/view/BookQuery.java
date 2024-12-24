@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class BookQuery {
+	private JFrame frame;
+
 	public BookQuery() {
 		final Font DEFAULT_FONT_18 = new Font(null, Font.PLAIN, 18);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
@@ -19,7 +21,7 @@ public class BookQuery {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
-		JFrame frame = new JFrame("图书查询");
+		frame = new JFrame("图书查询");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(820, 800);
 		frame.setLocationRelativeTo(null);
@@ -99,5 +101,13 @@ public class BookQuery {
 		panel.add(scrollPane);
 
 		frame.add(panel);
+	}
+
+	public void show() {
+		frame.setVisible(true);
+	}
+
+	public void hide() {
+		frame.setVisible(false);
 	}
 }
