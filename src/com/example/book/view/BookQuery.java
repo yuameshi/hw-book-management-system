@@ -134,8 +134,8 @@ public class BookQuery {
 						String.valueOf(results[i].getPrice()),
 						String.valueOf(results[i].getStock())
 				};
-				table.setModel(new DefaultTableModel(queryResults, columns));
 			}
+			table.setModel(new DefaultTableModel(queryResults, columns));
 		} catch (Exception e) {
 			DbNotRunning.show((Integer i) -> {
 				e.printStackTrace();

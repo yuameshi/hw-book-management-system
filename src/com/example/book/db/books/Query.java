@@ -37,10 +37,17 @@ public class Query {
 	public static Book[] byPublisher(String publisher) throws SQLException {
 		Connection connection = Utils.getConnection();
 		Statement statement = connection.createStatement();
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM `bookdb`.`book` WHERE `publisher` LIKE '%" + publisher + "%' LIMIT 100;");
-		ResultSet result = Utils.Query(sql.toString(), statement);
-		Book[] books = new Book[100];
+		ResultSet rowCountQuery = statement
+				.executeQuery(
+						"SELECT COUNT(*) totalCount FROM `bookdb`.`book` WHERE `publisher` LIKE '%" + publisher
+								+ "%';");
+		int rowCount = 999;
+		if (rowCountQuery.next()) {
+			rowCount = rowCountQuery.getInt("totalCount");
+		}
+		Book[] books = new Book[rowCount];
+		ResultSet result = Utils.Query("SELECT * FROM `bookdb`.`book` WHERE `publisher` LIKE '%" + publisher + "%';",
+				statement);
 		while (result.next()) {
 			Book.BookBuilder builder = new Book.BookBuilder(result.getString("id"));
 			builder.withName(result.getString("bookname"));
@@ -54,6 +61,7 @@ public class Query {
 			books[result.getRow() - 1] = builder.build();
 		}
 		Utils.CloseConnection(result, statement, connection);
+		System.err.println(books.length);
 		return books;
 	}
 }
