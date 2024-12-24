@@ -211,6 +211,8 @@ public class AddBook {
 			DbNotRunning.show((Integer i) -> {
 				// System.exit(1);
 			});
+			e.printStackTrace();
+			return;
 		}
 		String category = categoryCombo.getText();
 		String publishTime = publishTimeField.getText();
@@ -226,7 +228,7 @@ public class AddBook {
 			if (!category.isEmpty())
 				bookBuilder = bookBuilder.withCategory(category);
 			if (!publishTime.isEmpty()) {
-				if (Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", publishTime))
+				if (Pattern.matches("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}", publishTime))
 					bookBuilder = bookBuilder.withPublishTime(publishTime);
 				else {
 					publishTimeField.setText("");
