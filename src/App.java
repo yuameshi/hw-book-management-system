@@ -11,6 +11,8 @@ import com.example.book.view.BookQuery;
 import com.example.book.view.LoginDialog;
 import com.example.book.view.LoginDialog.LoginObject;
 import com.example.book.view.ResetPassword.ResetPasswordCallbackParam;
+import com.example.book.view.alerts.DbNotRunning;
+import com.example.book.view.alerts.UnexpectedError;
 
 public class App {
 	// User
@@ -68,24 +70,30 @@ public class App {
 		LoginDialog.show();
 	}
 
+	private static void handleExitApp(int status) {
+		System.out.println("Program exiting with status " + status + " . ");
+		System.exit(status);
+	}
+
 	public static void main(String[] args) throws Exception {
 		try {
 			PortTester tester = new PortTester();
 			if (!tester.isPortOpen("127.0.0.1", 3306)) {
-				System.out.println("MySQL is not running");
-				System.exit(1);
+				DbNotRunning.show(App::handleExitApp);
+			} else {
+				Initialization.SmartCreate();
+				LoginDialog = new LoginDialog(App::handleLogin);
+				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback,
+						App::NavigateResetPasswordToMain);
+				mainFrame = new MainFrame(App::handleResetPassword, App::handleExitSystem);
+				LoginDialog.show();
+				AddBookFrame = new AddBook();
+				UpdateBookFrame = new UpdateBook();
+				QueryBookFrame = new BookQuery();
 			}
 		} catch (Exception e) {
-			System.out.println("MySQL is not running");
+			UnexpectedError.show(App::handleExitApp);
 			System.exit(1);
 		}
-		Initialization.SmartCreate();
-		LoginDialog = new LoginDialog(App::handleLogin);
-		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::NavigateResetPasswordToMain);
-		mainFrame = new MainFrame(App::handleResetPassword, App::handleExitSystem);
-		LoginDialog.show();
-		AddBookFrame = new AddBook();
-		UpdateBookFrame = new UpdateBook();
-		QueryBookFrame = new BookQuery();
 	}
 }
