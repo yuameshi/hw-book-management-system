@@ -1,12 +1,13 @@
-import com.example.book.controller.Book;
 import com.example.book.controller.UserInfo;
 import com.example.book.db.Initialization;
-import com.example.book.db.books.Add;
 import com.example.book.db.user.Login;
+import com.example.book.db.user.ResetPasswordDb;
 import com.example.book.view.MainFrame;
+import com.example.book.view.ResetPassword;
 import com.example.book.view.AddBook;
 import com.example.book.view.LoginDialog;
 import com.example.book.view.LoginDialog.LoginObject;
+import com.example.book.view.ResetPassword.ResetPasswordCallbackParam;
 
 public class App {
 	// User
@@ -15,6 +16,7 @@ public class App {
 	private static LoginDialog LoginDialog;
 	private static AddBook AddBookFrame;
 	private static MainFrame mainFrame;
+	private static ResetPassword ResetPasswordDialog;
 
 	private static void handleLogin(LoginObject loginObject) {
 		try {
@@ -34,6 +36,19 @@ public class App {
 		}
 	}
 
+	private static void handleResetPassword() {
+		ResetPasswordDialog.show(user.uid);
+	}
+
+	private static void handleResetPasswordCallback(ResetPasswordCallbackParam returningData) {
+		try {
+			ResetPasswordDb.reset(returningData);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ResetPasswordDialog.hide();
+	}
+
 	private static void handleExitSystem() {
 		mainFrame.hide();
 		user = null;
@@ -48,6 +63,7 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		Initialization.SmartCreate();
 		LoginDialog = new LoginDialog(App::handleLogin, App::handleCloseApp);
+		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleExitSystem);
 		LoginDialog.show();
 		// Book book = new Book.BookBuilder("11")
 		// .withName("name")
@@ -56,6 +72,6 @@ public class App {
 		// ;
 		// Add.add(book);
 		AddBookFrame = new AddBook();
-		mainFrame = new MainFrame(App::handleExitSystem);
+		mainFrame = new MainFrame(App::handleResetPassword, App::handleExitSystem);
 	}
 }

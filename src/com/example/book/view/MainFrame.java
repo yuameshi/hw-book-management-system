@@ -16,7 +16,7 @@ public class MainFrame {
 	private static JMenu basicManageMenu;
 	private JMenu borrowMenu;
 
-	public MainFrame(Runnable closeHandler) {
+	public MainFrame(Runnable resetPasswordTrigger, Runnable closeHandler) {
 		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);
@@ -29,7 +29,7 @@ public class MainFrame {
 		basicManageMenu = getBasicManagement();
 		borrowMenu = getBorrowManagement();
 		JMenu queryManageMenu = getQueryManagement();
-		JMenu systemManageMenu = getSystemManagement(closeHandler);
+		JMenu systemManageMenu = getSystemManagement(resetPasswordTrigger, closeHandler);
 		menuBar.add(basicManageMenu);
 		menuBar.add(borrowMenu);
 		menuBar.add(queryManageMenu);
@@ -98,10 +98,17 @@ public class MainFrame {
 		return queryManageMenu;
 	}
 
-	private JMenu getSystemManagement(Runnable closeHandler) {
+	private JMenu getSystemManagement(Runnable resetPasswordTrigger, Runnable closeHandler) {
 		JMenu systemManageMenu = new JMenu("系统管理");
 		JMenuItem resetPassword = new JMenuItem("修改密码");
+		resetPassword.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resetPasswordTrigger.run();
+			}
+		});
 		systemManageMenu.add(resetPassword);
+
 		JMenuItem exitSystem = new JMenuItem("退出系统");
 		exitSystem.addActionListener(new ActionListener() {
 			@Override

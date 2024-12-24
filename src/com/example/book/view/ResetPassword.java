@@ -14,20 +14,27 @@ import java.util.function.Consumer;
 
 public class ResetPassword {
 	private static JFrame frame = new JFrame("重置密码");
+	private static int targetUid;
 
-	public class ResetPasswordReturn {
+	public class ResetPasswordCallbackParam {
+		int uid;
 		String password;
 
-		public ResetPasswordReturn(String password) {
+		public ResetPasswordCallbackParam(int uid, String password) {
+			this.uid = uid;
 			this.password = password;
 		}
 
 		public String getPassword() {
 			return password;
 		}
+
+		public int getUid() {
+			return this.uid;
+		}
 	}
 
-	public ResetPassword(Consumer<ResetPasswordReturn> loginHandler, Runnable closeHandler) {
+	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable closeHandler) {
 		Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
 		Color WHITE = Color.decode("#ffffff");
 		Color BLACK = Color.decode("#1b1b1b");
@@ -40,27 +47,27 @@ public class ResetPassword {
 		panel.setLayout(null);
 		panel.setBackground(Color.decode("#f0f0f0"));
 
-		JLabel newPasswdLabel = new JLabel("新密码：");
-		newPasswdLabel.setBounds(30, 20, 100, 40);
+		JLabel newPasswdLabel = new JLabel("新密码");
+		newPasswdLabel.setBounds(30, 20, 120, 40);
 		newPasswdLabel.setFont(DEFAULT_FONT);
 		newPasswdLabel.setForeground(BLACK);
 		panel.add(newPasswdLabel);
 
-		JTextField newPasswdField = new JTextField("");
-		newPasswdField.setBounds(140, 20, 200, 35);
+		JPasswordField newPasswdField = new JPasswordField("");
+		newPasswdField.setBounds(160, 20, 200, 35);
 		newPasswdField.setFont(DEFAULT_FONT);
 		newPasswdField.setBackground(WHITE);
 		newPasswdField.setForeground(GRAY);
 		panel.add(newPasswdField);
 
-		JLabel passwdComfirmLabel = new JLabel("确认密码：");
-		passwdComfirmLabel.setBounds(30, 70, 100, 40);
+		JLabel passwdComfirmLabel = new JLabel("确认密码");
+		passwdComfirmLabel.setBounds(30, 70, 120, 40);
 		passwdComfirmLabel.setFont(DEFAULT_FONT);
 		passwdComfirmLabel.setForeground(BLACK);
 		panel.add(passwdComfirmLabel);
 
 		JPasswordField passwordComfirmField = new JPasswordField("");
-		passwordComfirmField.setBounds(140, 70, 200, 35);
+		passwordComfirmField.setBounds(160, 70, 200, 35);
 		passwordComfirmField.setFont(DEFAULT_FONT);
 		passwordComfirmField.setBackground(WHITE);
 		passwordComfirmField.setForeground(GRAY);
@@ -75,8 +82,14 @@ public class ResetPassword {
 		submitBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (newPasswdField.getText().isEmpty() || new String(passwordComfirmField.getPassword()).isEmpty()) {
+					return;
+				}
+				if (!newPasswdField.getText().equals(new String(passwordComfirmField.getPassword()))) {
+					return;
+				}
 				String password = new String(passwordComfirmField.getPassword());
-				loginHandler.accept(new ResetPasswordReturn(password));
+				callback.accept(new ResetPasswordCallbackParam(targetUid, password));
 			}
 		});
 		panel.add(submitBtn);
@@ -84,7 +97,8 @@ public class ResetPassword {
 		frame.add(panel);
 	}
 
-	public void show() {
+	public void show(int uid) {
+		targetUid = uid;
 		frame.setVisible(true);
 	}
 
