@@ -37,6 +37,7 @@ public class App {
 	}
 
 	private static void handleResetPassword() {
+		mainFrame.hide();
 		ResetPasswordDialog.show(user.uid);
 	}
 
@@ -47,6 +48,12 @@ public class App {
 			e.printStackTrace();
 		}
 		ResetPasswordDialog.hide();
+		mainFrame.show();
+	}
+
+	private static void NavigateResetPasswordToMain() {
+		ResetPasswordDialog.hide();
+		mainFrame.show();
 	}
 
 	private static void handleExitSystem() {
@@ -63,7 +70,7 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		Initialization.SmartCreate();
 		LoginDialog = new LoginDialog(App::handleLogin, App::handleCloseApp);
-		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleExitSystem);
+		ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::NavigateResetPasswordToMain);
 		LoginDialog.show();
 		// Book book = new Book.BookBuilder("11")
 		// .withName("name")

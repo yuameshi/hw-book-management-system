@@ -3,7 +3,6 @@ package com.example.book.view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
@@ -34,7 +33,7 @@ public class ResetPassword {
 		}
 	}
 
-	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable closeHandler) {
+	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable backHandler) {
 		Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
 		Color WHITE = Color.decode("#ffffff");
 		Color BLACK = Color.decode("#1b1b1b");
@@ -73,8 +72,8 @@ public class ResetPassword {
 		passwordComfirmField.setForeground(GRAY);
 		panel.add(passwordComfirmField);
 
-		JButton submitBtn = new JButton("登录");
-		submitBtn.setBounds(125, 130, 110, 45);
+		JButton submitBtn = new JButton("确认");
+		submitBtn.setBounds(60, 130, 110, 45);
 		submitBtn.setFont(new Font(null, Font.PLAIN, 20));
 		submitBtn.setBackground(WHITE);
 		submitBtn.setForeground(BLACK);
@@ -82,10 +81,11 @@ public class ResetPassword {
 		submitBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (newPasswdField.getText().isEmpty() || new String(passwordComfirmField.getPassword()).isEmpty()) {
+				if (new String(newPasswdField.getPassword()).isEmpty()
+						|| new String(passwordComfirmField.getPassword()).isEmpty()) {
 					return;
 				}
-				if (!newPasswdField.getText().equals(new String(passwordComfirmField.getPassword()))) {
+				if (!newPasswdField.getPassword().equals(new String(passwordComfirmField.getPassword()))) {
 					return;
 				}
 				String password = new String(passwordComfirmField.getPassword());
@@ -93,6 +93,20 @@ public class ResetPassword {
 			}
 		});
 		panel.add(submitBtn);
+
+		JButton goBack = new JButton("返回");
+		goBack.setBounds(200, 130, 110, 45);
+		goBack.setFont(new Font(null, Font.PLAIN, 20));
+		goBack.setBackground(WHITE);
+		goBack.setForeground(BLACK);
+		goBack.setFocusPainted(false);
+		goBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				backHandler.run();
+			}
+		});
+		panel.add(goBack);
 
 		frame.add(panel);
 	}
