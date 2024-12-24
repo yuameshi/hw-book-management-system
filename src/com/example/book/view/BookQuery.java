@@ -99,6 +99,5 @@ public class BookQuery {
 		panel.add(scrollPane);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 }

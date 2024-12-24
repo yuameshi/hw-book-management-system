@@ -91,7 +91,6 @@ public class LoginDialog {
 		panel.add(loginBtn);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 
 	public void show() {

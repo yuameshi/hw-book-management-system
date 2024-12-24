@@ -160,7 +160,6 @@ public class AddBook {
 		panel.add(closeBtn);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 
 	public void show() {

@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame {
-	public MainFrame() {
+	public MainFrame(Runnable closeHandler) {
 		JFrame frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);
@@ -24,11 +24,10 @@ public class MainFrame {
 		menuBar.add(getBasicManagement());
 		menuBar.add(getBorrowManagement());
 		menuBar.add(getQueryManagement());
-		menuBar.add(getSystemManagement());
+		menuBar.add(getSystemManagement(closeHandler));
 		frame.setJMenuBar(menuBar);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 
 	private JMenu getBasicManagement() {
@@ -88,7 +87,7 @@ public class MainFrame {
 		return queryManageMenu;
 	}
 
-	private JMenu getSystemManagement() {
+	private JMenu getSystemManagement(Runnable closeHandler) {
 		JMenu systemManageMenu = new JMenu("系统管理");
 		JMenuItem resetPassword = new JMenuItem("借书管理");
 		JMenuItem exitSystem = new JMenuItem("退出系统");

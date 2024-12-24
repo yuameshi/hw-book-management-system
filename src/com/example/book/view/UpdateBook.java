@@ -176,6 +176,5 @@ public class UpdateBook {
 		panel.add(deleteBtn);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 }

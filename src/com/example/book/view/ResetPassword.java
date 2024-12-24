@@ -82,7 +82,6 @@ public class ResetPassword {
 		panel.add(submitBtn);
 
 		frame.add(panel);
-		frame.setVisible(true);
 	}
 
 	public void show() {
