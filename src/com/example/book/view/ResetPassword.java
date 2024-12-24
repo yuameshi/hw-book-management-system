@@ -85,7 +85,7 @@ public class ResetPassword {
 						|| new String(passwordComfirmField.getPassword()).isEmpty()) {
 					return;
 				}
-				if (!newPasswdField.getPassword().equals(new String(passwordComfirmField.getPassword()))) {
+				if (!new String(newPasswdField.getPassword()).equals(new String(passwordComfirmField.getPassword()))) {
 					return;
 				}
 				String password = new String(passwordComfirmField.getPassword());
