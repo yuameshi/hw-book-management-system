@@ -117,13 +117,38 @@ public class BookQuery {
 
 	private void query() {
 		try {
-			Book[] results = Query.byPublisher(pubField.getText());
-			queryResults = new String[results.length][];
+			Book[] resultsByBookName = {};
+			Book[] resultsByAuthor = {};
+			Book[] resultsByPublisher = {};
+			if (!bookNameField.getText().isEmpty()) {
+				resultsByBookName = Query.byBookName(bookNameField.getText());
+			}
+			if (!authorField.getText().isEmpty()) {
+				resultsByAuthor = Query.byAuthor(authorField.getText());
+			}
+			if (!pubField.getText().isEmpty()) {
+				resultsByPublisher = Query.byPublisher(pubField.getText());
+			}
+			Book[] results = new Book[resultsByBookName.length + resultsByAuthor.length + resultsByPublisher.length];
+			System.arraycopy(resultsByBookName, 0, results, 0, resultsByBookName.length);
+			System.arraycopy(resultsByAuthor, 0, results, resultsByBookName.length, resultsByAuthor.length);
+			System.arraycopy(resultsByPublisher, 0, results, resultsByBookName.length + resultsByAuthor.length,
+					resultsByPublisher.length);
+
+			String[][] tableResults = new String[results.length][];
+			int realLength = 0;
 			for (int i = 0; i < results.length; i++) {
-				if (results[i] == null) {
-					break;
+				boolean isExist = false;
+				for (int j = 0; j < i; j++) {
+					if (tableResults[j][0].equals(results[i].getId())) {
+						isExist = true;
+						break;
+					}
 				}
-				queryResults[i] = new String[] {
+				if (isExist) {
+					continue;
+				}
+				tableResults[i] = new String[] {
 						results[i].getId(),
 						results[i].getBookName(),
 						results[i].getCategory(),
@@ -134,8 +159,15 @@ public class BookQuery {
 						String.valueOf(results[i].getPrice()),
 						String.valueOf(results[i].getStock())
 				};
+				realLength++;
 			}
-			table.setModel(new DefaultTableModel(queryResults, columns));
+			String[][] tableResultsFiltered = new String[realLength][];
+			for (int i = 0; i < tableResults.length; i++) {
+				if (tableResults[i] != null) {
+					tableResultsFiltered[i] = tableResults[i];
+				}
+			}
+			table.setModel(new DefaultTableModel(tableResultsFiltered, columns));
 		} catch (Exception e) {
 			DbNotRunning.show((Integer i) -> {
 				e.printStackTrace();
