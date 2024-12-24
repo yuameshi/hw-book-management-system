@@ -6,6 +6,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import com.example.book.view.alerts.NotImplemented;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +70,7 @@ public class Main {
 		borrowManageItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.err.println("Function not implemented. ");
+				NotImplemented.show();
 			}
 		});
 		borrowManageMenu.add(borrowManageItem);
@@ -77,7 +79,7 @@ public class Main {
 		returnManageItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.err.println("Function not implemented. ");
+				NotImplemented.show();
 			}
 		});
 		borrowManageMenu.add(returnManageItem);
