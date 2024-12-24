@@ -45,19 +45,15 @@ public class Main {
 
 		JMenu bookManageMenu = new JMenu("图书维护");
 		JMenuItem addBookItem = new JMenuItem("添加图书");
-		JMenuItem updateBookItem = new JMenuItem("修改图书");
-		JMenuItem deleteBookItem = new JMenuItem("删除图书");
+		JMenuItem updateBookItem = new JMenuItem("修改/删除图书");
 		bookManageMenu.add(addBookItem);
 		bookManageMenu.add(updateBookItem);
-		bookManageMenu.add(deleteBookItem);
 
 		JMenu readerManageMenu = new JMenu("读者维护");
 		JMenuItem addReaderItem = new JMenuItem("添加读者");
-		JMenuItem updateReaderItem = new JMenuItem("修改读者");
-		JMenuItem deleteReaderItem = new JMenuItem("删除读者");
+		JMenuItem updateReaderItem = new JMenuItem("修改删除/读者");
 		readerManageMenu.add(addReaderItem);
 		readerManageMenu.add(updateReaderItem);
-		readerManageMenu.add(deleteReaderItem);
 
 		basicManageMenu.add(bookManageMenu);
 		basicManageMenu.add(readerManageMenu);
