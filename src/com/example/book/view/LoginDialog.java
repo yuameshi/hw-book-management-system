@@ -14,6 +14,8 @@ import java.util.function.Consumer;
 
 public class LoginDialog {
 	private static JFrame frame = new JFrame("登录");
+	private static JTextField unameField;
+	private static JPasswordField passwordField;
 
 	public class LoginObject {
 		String username;
@@ -52,7 +54,7 @@ public class LoginDialog {
 		unameLabel.setForeground(BLACK);
 		panel.add(unameLabel);
 
-		JTextField unameField = new JTextField("");
+		unameField = new JTextField("");
 		unameField.setBounds(140, 20, 200, 35);
 		unameField.setFont(DEFAULT_FONT);
 		unameField.setBackground(WHITE);
@@ -65,7 +67,7 @@ public class LoginDialog {
 		passwordLabel.setForeground(BLACK);
 		panel.add(passwordLabel);
 
-		JPasswordField passwordField = new JPasswordField("");
+		passwordField = new JPasswordField("");
 		passwordField.setBounds(140, 70, 200, 35);
 		passwordField.setFont(DEFAULT_FONT);
 		passwordField.setBackground(WHITE);
@@ -98,5 +100,16 @@ public class LoginDialog {
 
 	public void hide() {
 		frame.setVisible(false);
+	}
+
+	public void close() {
+		frame.setVisible(false);
+		unameField.setText("");
+		passwordField.setText("");
+	}
+
+	public void reset() {
+		unameField.setText("");
+		passwordField.setText("");
 	}
 }

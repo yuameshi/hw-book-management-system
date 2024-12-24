@@ -9,6 +9,17 @@ import java.awt.Color;
 import java.awt.Font;
 
 public class AddBook {
+	private static JFrame frame;
+	private static JTextField idField;
+	private static JTextField categoryCombo;
+	private static JTextField publishTimeField;
+	private static JTextField stockField;
+	private static JTextField translatorField;
+	private static JTextField nameField;
+	private static JTextField authorField;
+	private static JTextField pubField;
+	private static JTextField priceField;
+
 	public AddBook() {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 14);
@@ -16,7 +27,7 @@ public class AddBook {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
-		JFrame frame = new JFrame("添加图书");
+		frame = new JFrame("添加图书");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(750, 400);
 		frame.setLocationRelativeTo(null);
@@ -29,7 +40,7 @@ public class AddBook {
 		idLabel.setFont(DEFAULT_FONT_20);
 		idLabel.setForeground(BLACK);
 		panel.add(idLabel);
-		JTextField idField = new JTextField("");
+		idField = new JTextField("");
 		idField.setBounds(150, 30, 200, 30);
 		idField.setFont(DEFAULT_FONT_20);
 		idField.setBackground(WHITE);
@@ -41,7 +52,7 @@ public class AddBook {
 		categoryLabel.setFont(DEFAULT_FONT_20);
 		categoryLabel.setForeground(BLACK);
 		panel.add(categoryLabel);
-		JTextField categoryCombo = new JTextField("");
+		categoryCombo = new JTextField("");
 		categoryCombo.setBounds(150, 80, 200, 30);
 		categoryCombo.setFont(DEFAULT_FONT_20);
 		categoryCombo.setBackground(WHITE);
@@ -53,7 +64,7 @@ public class AddBook {
 		publishTimeLabel.setFont(DEFAULT_FONT_20);
 		publishTimeLabel.setForeground(BLACK);
 		panel.add(publishTimeLabel);
-		JTextField publishTimeField = new JTextField("");
+		publishTimeField = new JTextField("");
 		publishTimeField.setBounds(150, 230, 200, 30);
 		publishTimeField.setFont(DEFAULT_FONT_20);
 		publishTimeField.setBackground(WHITE);
@@ -65,7 +76,7 @@ public class AddBook {
 		stockLabel.setFont(DEFAULT_FONT_20);
 		stockLabel.setForeground(BLACK);
 		panel.add(stockLabel);
-		JTextField stockField = new JTextField("");
+		stockField = new JTextField("");
 		stockField.setBounds(150, 180, 200, 30);
 		stockField.setFont(DEFAULT_FONT_20);
 		stockField.setBackground(WHITE);
@@ -77,7 +88,7 @@ public class AddBook {
 		translatorLabel.setFont(DEFAULT_FONT_20);
 		translatorLabel.setForeground(BLACK);
 		panel.add(translatorLabel);
-		JTextField translatorField = new JTextField("");
+		translatorField = new JTextField("");
 		translatorField.setBounds(150, 130, 200, 30);
 		translatorField.setFont(DEFAULT_FONT_20);
 		translatorField.setBackground(WHITE);
@@ -89,7 +100,7 @@ public class AddBook {
 		nameLabel.setFont(DEFAULT_FONT_20);
 		nameLabel.setForeground(BLACK);
 		panel.add(nameLabel);
-		JTextField nameField = new JTextField("");
+		nameField = new JTextField("");
 		nameField.setBounds(500, 30, 200, 30);
 		nameField.setFont(DEFAULT_FONT_20);
 		nameField.setBackground(WHITE);
@@ -101,7 +112,7 @@ public class AddBook {
 		authorLabel.setFont(DEFAULT_FONT_20);
 		authorLabel.setForeground(BLACK);
 		panel.add(authorLabel);
-		JTextField authorField = new JTextField("");
+		authorField = new JTextField("");
 		authorField.setBounds(500, 80, 200, 30);
 		authorField.setFont(DEFAULT_FONT_20);
 		authorField.setBackground(WHITE);
@@ -113,7 +124,7 @@ public class AddBook {
 		pubLabel.setFont(DEFAULT_FONT_20);
 		pubLabel.setForeground(BLACK);
 		panel.add(pubLabel);
-		JTextField pubField = new JTextField("");
+		pubField = new JTextField("");
 		pubField.setBounds(500, 130, 200, 30);
 		pubField.setFont(DEFAULT_FONT_20);
 		pubField.setBackground(WHITE);
@@ -125,7 +136,7 @@ public class AddBook {
 		priceLabel.setFont(DEFAULT_FONT_20);
 		priceLabel.setForeground(BLACK);
 		panel.add(priceLabel);
-		JTextField priceField = new JTextField("");
+		priceField = new JTextField("");
 		priceField.setBounds(500, 180, 200, 30);
 		priceField.setFont(DEFAULT_FONT_20);
 		priceField.setBackground(WHITE);
@@ -150,5 +161,38 @@ public class AddBook {
 
 		frame.add(panel);
 		frame.setVisible(true);
+	}
+
+	public void show() {
+		frame.setVisible(true);
+	}
+
+	public void hide() {
+		frame.setVisible(false);
+	}
+
+	public void close() {
+		frame.setVisible(false);
+		idField.setText("");
+		categoryCombo.setText("");
+		publishTimeField.setText("");
+		stockField.setText("");
+		translatorField.setText("");
+		nameField.setText("");
+		authorField.setText("");
+		pubField.setText("");
+		priceField.setText("");
+	}
+
+	public void reset() {
+		idField.setText("");
+		categoryCombo.setText("");
+		publishTimeField.setText("");
+		stockField.setText("");
+		translatorField.setText("");
+		nameField.setText("");
+		authorField.setText("");
+		pubField.setText("");
+		priceField.setText("");
 	}
 }
