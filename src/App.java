@@ -100,11 +100,12 @@ public class App {
 				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleOpenMain);
 				MainFrame = new Main(
 						App::openAddBookFrame, App::openUpdateBookFrame,
+						App::handleOpenQueryBook,
 						App::openResetPasswordFrame, App::handleExitSystem);
 				LoginDialog.show();
 				AddBookFrame = new AddBook(App::handleOpenMain);
 				UpdateBookFrame = new UpdateBook(App::handleOpenMain);
-				QueryBookFrame = new BookQuery();
+				QueryBookFrame = new BookQuery(App::handleOpenMain);
 			}
 		} catch (Exception e) {
 			UnexpectedError.show(App::handleExitApp);

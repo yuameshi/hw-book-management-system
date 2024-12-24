@@ -7,14 +7,26 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.example.book.controller.Book;
+import com.example.book.db.books.Query;
+import com.example.book.view.alerts.DbNotRunning;
+
 import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
 
 public class BookQuery {
 	private JFrame frame;
+	private JTextField bookNameField;
+	private JTextField authorField;
+	private JTextField pubField;
+	JTable table;
 
-	public BookQuery() {
+	String[] columns = { "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" };
+	private String[][] queryResults = {};
+
+	public BookQuery(Runnable goMainHandler) {
 		final Font DEFAULT_FONT_18 = new Font(null, Font.PLAIN, 18);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 20);
 		final Color WHITE = Color.decode("#ffffff");
@@ -34,7 +46,7 @@ public class BookQuery {
 		bookNameLabel.setFont(DEFAULT_FONT_18);
 		bookNameLabel.setForeground(BLACK);
 		panel.add(bookNameLabel);
-		JTextField bookNameField = new JTextField("");
+		bookNameField = new JTextField("");
 		bookNameField.setBounds(140, 20, 150, 30);
 		bookNameField.setFont(DEFAULT_FONT_18);
 		bookNameField.setBackground(WHITE);
@@ -46,7 +58,7 @@ public class BookQuery {
 		authorLabel.setFont(DEFAULT_FONT_18);
 		authorLabel.setForeground(BLACK);
 		panel.add(authorLabel);
-		JTextField authorField = new JTextField("");
+		authorField = new JTextField("");
 		authorField.setBounds(350, 20, 150, 30);
 		authorField.setFont(DEFAULT_FONT_18);
 		authorField.setBackground(WHITE);
@@ -58,7 +70,7 @@ public class BookQuery {
 		pubLabel.setFont(DEFAULT_FONT_18);
 		pubLabel.setForeground(BLACK);
 		panel.add(pubLabel);
-		JTextField pubField = new JTextField("");
+		pubField = new JTextField("");
 		pubField.setBounds(580, 20, 150, 28);
 		pubField.setFont(DEFAULT_FONT_18);
 		pubField.setBackground(WHITE);
@@ -71,6 +83,9 @@ public class BookQuery {
 		queryBtn.setForeground(BLACK);
 		queryBtn.setFont(DEFAULT_FONT_14);
 		queryBtn.setFocusPainted(false);
+		queryBtn.addActionListener((e) -> {
+			query();
+		});
 		panel.add(queryBtn);
 
 		JButton closeBtn = new JButton("关闭");
@@ -79,17 +94,14 @@ public class BookQuery {
 		closeBtn.setForeground(BLACK);
 		closeBtn.setFont(DEFAULT_FONT_14);
 		closeBtn.setFocusPainted(false);
+		closeBtn.addActionListener((e) -> {
+			goMainHandler.run();
+			close();
+		});
 		panel.add(closeBtn);
 
-		String[][] data = {
-				{ "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" },
-				{ "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" },
-				{ "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" },
-				{ "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" },
-		};
-		String[] columns = { "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" };
-		DefaultTableModel model = new DefaultTableModel(data, columns);
-		JTable table = new JTable(model) {
+		DefaultTableModel model = new DefaultTableModel(queryResults, columns);
+		table = new JTable(model) {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
@@ -103,11 +115,46 @@ public class BookQuery {
 		frame.add(panel);
 	}
 
+	private void query() {
+		try {
+			Book[] results = Query.byPublisher(pubField.getText());
+			queryResults = new String[results.length][];
+			for (int i = 0; i < results.length; i++) {
+				if (results[i] == null) {
+					break;
+				}
+				queryResults[i] = new String[] {
+						results[i].getId(),
+						results[i].getBookName(),
+						results[i].getCategory(),
+						results[i].getAuthor(),
+						results[i].getTranslator(),
+						results[i].getPublisher(),
+						results[i].getPublishTime(),
+						String.valueOf(results[i].getPrice()),
+						String.valueOf(results[i].getStock())
+				};
+				table.setModel(new DefaultTableModel(queryResults, columns));
+			}
+		} catch (Exception e) {
+			DbNotRunning.show((Integer i) -> {
+				e.printStackTrace();
+			});
+		}
+	}
+
 	public void show() {
 		frame.setVisible(true);
 	}
 
 	public void hide() {
 		frame.setVisible(false);
+	}
+
+	public void close() {
+		frame.setVisible(false);
+		pubField.setText("");
+		authorField.setText("");
+		bookNameField.setText("");
 	}
 }
