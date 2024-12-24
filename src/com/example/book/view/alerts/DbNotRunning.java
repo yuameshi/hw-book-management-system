@@ -14,6 +14,7 @@ public class DbNotRunning {
 		dialog.setTitle("连接数据库失败");
 		dialog.setSize(320, 120);
 		dialog.setLocationRelativeTo(null);
+		dialog.setModal(true);
 		dialog.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				callback.accept(1);

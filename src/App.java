@@ -43,7 +43,7 @@ public class App {
 		}
 	}
 
-	private static void handleResetPassword() {
+	private static void openResetPasswordFrame() {
 		MainFrame.hide();
 		ResetPasswordDialog.show(user.uid);
 	}
@@ -74,12 +74,12 @@ public class App {
 		System.exit(status);
 	}
 
-	private static void handleOpenAddBook() {
+	private static void openAddBookFrame() {
 		MainFrame.hide();
 		AddBookFrame.show();
 	}
 
-	private static void handleOpenUpdateBook() {
+	private static void openUpdateBookFrame() {
 		MainFrame.hide();
 		UpdateBookFrame.show();
 	}
@@ -87,11 +87,6 @@ public class App {
 	private static void handleOpenQueryBook() {
 		MainFrame.hide();
 		QueryBookFrame.show();
-	}
-
-	private static void handleExitAddBook() {
-		AddBookFrame.hide();
-		MainFrame.show();
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -103,9 +98,11 @@ public class App {
 				Initialization.SmartCreate();
 				LoginDialog = new LoginDialog(App::handleLogin);
 				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleOpenMain);
-				MainFrame = new Main(App::handleResetPassword, App::handleExitSystem);
+				MainFrame = new Main(
+						App::openAddBookFrame,
+						App::openResetPasswordFrame, App::handleExitSystem);
 				LoginDialog.show();
-				AddBookFrame = new AddBook();
+				AddBookFrame = new AddBook(App::handleOpenMain);
 				UpdateBookFrame = new UpdateBook();
 				QueryBookFrame = new BookQuery();
 			}

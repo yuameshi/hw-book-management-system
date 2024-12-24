@@ -5,8 +5,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.example.book.controller.Book;
+import com.example.book.db.books.Add;
+import com.example.book.db.books.Query;
+import com.example.book.view.alerts.DbNotRunning;
+import com.example.book.view.alerts.Book.SuccessAdd;
+
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 public class AddBook {
 	private static JFrame frame;
@@ -19,8 +29,9 @@ public class AddBook {
 	private static JTextField authorField;
 	private static JTextField pubField;
 	private static JTextField priceField;
+	private static JLabel errorLabel;
 
-	public AddBook() {
+	public AddBook(Runnable goHome) {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);
 		final Font DEFAULT_FONT_14 = new Font(null, Font.PLAIN, 14);
 		final Color WHITE = Color.decode("#ffffff");
@@ -65,7 +76,7 @@ public class AddBook {
 		publishTimeLabel.setForeground(BLACK);
 		panel.add(publishTimeLabel);
 		publishTimeField = new JTextField("");
-		publishTimeField.setBounds(150, 230, 200, 30);
+		publishTimeField.setBounds(150, 180, 200, 30);
 		publishTimeField.setFont(DEFAULT_FONT_20);
 		publishTimeField.setBackground(WHITE);
 		publishTimeField.setForeground(GRAY);
@@ -77,7 +88,7 @@ public class AddBook {
 		stockLabel.setForeground(BLACK);
 		panel.add(stockLabel);
 		stockField = new JTextField("");
-		stockField.setBounds(150, 180, 200, 30);
+		stockField.setBounds(150, 230, 200, 30);
 		stockField.setFont(DEFAULT_FONT_20);
 		stockField.setBackground(WHITE);
 		stockField.setForeground(GRAY);
@@ -143,12 +154,25 @@ public class AddBook {
 		priceField.setForeground(GRAY);
 		panel.add(priceField);
 
+		errorLabel = new JLabel("");
+		errorLabel.setBounds(400, 230, 300, 30);
+		errorLabel.setFont(DEFAULT_FONT_20);
+		errorLabel.setForeground(Color.RED);
+		errorLabel.setVisible(false);
+		panel.add(errorLabel);
+
 		JButton saveBtn = new JButton("保存");
 		saveBtn.setBounds(230, 280, 120, 30);
 		saveBtn.setBackground(WHITE);
 		saveBtn.setForeground(BLACK);
 		saveBtn.setFont(DEFAULT_FONT_14);
 		saveBtn.setFocusPainted(false);
+		saveBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addBookHandler(goHome);
+			}
+		});
 		panel.add(saveBtn);
 
 		JButton closeBtn = new JButton("关闭");
@@ -157,9 +181,86 @@ public class AddBook {
 		closeBtn.setForeground(BLACK);
 		closeBtn.setFont(DEFAULT_FONT_14);
 		closeBtn.setFocusPainted(false);
+		closeBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				close();
+				goHome.run();
+			}
+		});
 		panel.add(closeBtn);
 
 		frame.add(panel);
+	}
+
+	private void addBookHandler(Runnable goHome) {
+		String id = idField.getText();
+		if (id.isEmpty()) {
+			errorLabel.setText("图书编号不能为空");
+			errorLabel.setVisible(true);
+			return;
+		}
+		try {
+			Book book = Query.byId(Integer.valueOf(id));
+			if (book != null) {
+				errorLabel.setText("图书编号已存在");
+				errorLabel.setVisible(true);
+				return;
+			}
+		} catch (Exception e) {
+			DbNotRunning.show((Integer i) -> {
+				// System.exit(1);
+			});
+		}
+		String category = categoryCombo.getText();
+		String publishTime = publishTimeField.getText();
+		String stock = stockField.getText();
+		String translator = translatorField.getText();
+		String name = nameField.getText();
+		String author = authorField.getText();
+		String pub = pubField.getText();
+		String price = priceField.getText();
+
+		try {
+			Book.BookBuilder bookBuilder = new Book.BookBuilder(id);
+			if (!category.isEmpty())
+				bookBuilder = bookBuilder.withCategory(category);
+			if (!publishTime.isEmpty()) {
+				if (Pattern.matches("\\d{4}-\\d{1,2}-\\d{1,2}", publishTime))
+					bookBuilder = bookBuilder.withPublishTime(publishTime);
+				else {
+					publishTimeField.setText("");
+					errorLabel.setText("出版时间格式错误");
+					errorLabel.setVisible(true);
+					return;
+				}
+			}
+			if (!stock.isEmpty())
+				bookBuilder.withStock(Integer.parseInt(stock));
+			if (!translator.isEmpty())
+				bookBuilder.withTranslator(translator);
+			if (!name.isEmpty())
+				bookBuilder.withName(name);
+			if (!author.isEmpty())
+				bookBuilder.withAuthor(author);
+			if (!pub.isEmpty())
+				bookBuilder.withPublisher(pub);
+			if (!price.isEmpty())
+				bookBuilder.withPrice(Float.parseFloat(price));
+			try {
+				Add.add(bookBuilder.build());
+			} catch (Exception e) {
+				errorLabel.setText("图书编号已存在");
+				errorLabel.setVisible(true);
+				return;
+			}
+			SuccessAdd.show();
+			goHome.run();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		goHome.run();
 	}
 
 	public void show() {
