@@ -25,8 +25,10 @@ public class App {
 			} else {
 				user = retUser;
 				LoginDialog.hidePasswordError();
-				// LoginDialog.close();
-				// mainFrame.();
+				LoginDialog.close();
+				if (user.isAdmin)
+					mainFrame.isAdmin = true;
+				mainFrame.show();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,7 +36,7 @@ public class App {
 	}
 
 	private static void handleExitSystem() {
-		// MainFrame.close();
+		mainFrame.hide();
 		user = null;
 		LoginDialog.reset();
 		LoginDialog.show();

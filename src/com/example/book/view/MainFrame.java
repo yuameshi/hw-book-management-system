@@ -11,8 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame {
+	private static JFrame frame;
+	public boolean isAdmin = false;
+
 	public MainFrame(Runnable closeHandler) {
-		JFrame frame = new JFrame("图书管理系统");
+		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 200);
 		frame.setLocationRelativeTo(null);
@@ -32,6 +35,7 @@ public class MainFrame {
 
 	private JMenu getBasicManagement() {
 		JMenu basicManageMenu = new JMenu("基础维护");
+		basicManageMenu.setEnabled(isAdmin);
 
 		JMenu bookManageMenu = new JMenu("图书维护");
 		JMenuItem addBookItem = new JMenuItem("添加图书");
@@ -57,6 +61,7 @@ public class MainFrame {
 
 	private JMenu getBorrowManagement() {
 		JMenu borrowManageMenu = new JMenu("借阅管理");
+		borrowManageMenu.setEnabled(isAdmin);
 		JMenuItem borrowManageItem = new JMenuItem("借书管理");
 		borrowManageItem.addActionListener(new ActionListener() {
 			@Override
@@ -89,10 +94,25 @@ public class MainFrame {
 
 	private JMenu getSystemManagement(Runnable closeHandler) {
 		JMenu systemManageMenu = new JMenu("系统管理");
-		JMenuItem resetPassword = new JMenuItem("借书管理");
-		JMenuItem exitSystem = new JMenuItem("退出系统");
+		JMenuItem resetPassword = new JMenuItem("修改密码");
 		systemManageMenu.add(resetPassword);
+		JMenuItem exitSystem = new JMenuItem("退出系统");
+		exitSystem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				closeHandler.run();
+			}
+		});
 		systemManageMenu.add(exitSystem);
 		return systemManageMenu;
 	}
+
+	public void show() {
+		frame.setVisible(true);
+	}
+
+	public void hide() {
+		frame.setVisible(false);
+	}
+
 }
