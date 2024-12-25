@@ -13,14 +13,14 @@ import java.awt.event.ActionListener;
 import java.util.function.Consumer;
 
 public class LoginDialog {
-	private static JFrame frame = new JFrame("登录");
-	private static JTextField unameField;
-	private static JPasswordField passwordField;
-	private static JLabel errorMsg;
+	private JFrame frame = new JFrame("登录");
+	private JTextField unameField;
+	private JPasswordField passwordField;
+	private JLabel errorMsg;
 
 	public class LoginObject {
-		String username;
-		String password;
+		private String username;
+		private String password;
 
 		public LoginObject(String uname, String password) {
 			this.username = uname;

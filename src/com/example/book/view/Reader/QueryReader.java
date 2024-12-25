@@ -19,9 +19,9 @@ import java.awt.Font;
 public class QueryReader {
 	private JFrame frame;
 	private JTextField nameField;
-	JTable table;
+	private JTable table;
 
-	String[] columns = { "读者编号", "读者姓名", "读者性别", "读者类别", "最大可借数", "可借天数" };
+	private String[] columns = { "读者编号", "读者姓名", "读者性别", "读者类别", "最大可借数", "可借天数" };
 	private String[][] queryResults = {};
 
 	public QueryReader(Runnable goMainHandler) {

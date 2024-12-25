@@ -21,9 +21,9 @@ public class QueryBook {
 	private JTextField bookNameField;
 	private JTextField authorField;
 	private JTextField pubField;
-	JTable table;
+	private JTable table;
 
-	String[] columns = { "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" };
+	private String[] columns = { "图书编号", "图书名称", "图书类别", "作者", "译者", "出版社", "出版日期", "定价", "库存" };
 	private String[][] queryResults = {};
 
 	public QueryBook(Runnable goMainHandler) {

@@ -19,17 +19,17 @@ import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
 public class AddBook {
-	private static JFrame frame;
-	private static JTextField idField;
-	private static JTextField categoryCombo;
-	private static JTextField publishTimeField;
-	private static JTextField stockField;
-	private static JTextField translatorField;
-	private static JTextField nameField;
-	private static JTextField authorField;
-	private static JTextField pubField;
-	private static JTextField priceField;
-	private static JLabel errorLabel;
+	private JFrame frame;
+	private JTextField idField;
+	private JTextField categoryCombo;
+	private JTextField publishTimeField;
+	private JTextField stockField;
+	private JTextField translatorField;
+	private JTextField nameField;
+	private JTextField authorField;
+	private JTextField pubField;
+	private JTextField priceField;
+	private JLabel errorLabel;
 
 	public AddBook(Runnable goHome) {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);

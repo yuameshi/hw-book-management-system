@@ -21,23 +21,23 @@ import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
 public class UpdateBook {
-	JFrame frame;
+	private JFrame frame;
 
-	JTextField idField;
-	JTextField categoryCombo;
-	JTextField publishTimeField;
-	JTextField stockField;
-	JTextField translatorField;
-	JTextField nameField;
-	JTextField authorField;
-	JTextField pubField;
-	JTextField priceField;
-	JTextField queryIdLabelField;
-	JLabel errorLabel;
-	JButton saveBtn;
-	JButton deleteBtn;
+	private JTextField idField;
+	private JTextField categoryCombo;
+	private JTextField publishTimeField;
+	private JTextField stockField;
+	private JTextField translatorField;
+	private JTextField nameField;
+	private JTextField authorField;
+	private JTextField pubField;
+	private JTextField priceField;
+	private JTextField queryIdLabelField;
+	private JLabel errorLabel;
+	private JButton saveBtn;
+	private JButton deleteBtn;
 
-	Book oldBook;
+	private Book oldBook;
 
 	public UpdateBook(Runnable openMainFrame) {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);

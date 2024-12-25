@@ -18,14 +18,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddReader {
-	private static JFrame frame;
-	private static JTextField idField;
-	private static JTextField readerNameField;
-	private static JTextField readerTypeCombo;
-	private static JTextField readerSexField;
-	private static JTextField maxBorrowBookCountField;
-	private static JTextField maxBorrowDayCountField;
-	private static JLabel errorLabel;
+	private JFrame frame;
+	private JTextField idField;
+	private JTextField readerNameField;
+	private JTextField readerTypeCombo;
+	private JTextField readerSexField;
+	private JTextField maxBorrowBookCountField;
+	private JTextField maxBorrowDayCountField;
+	private JLabel errorLabel;
 
 	public AddReader(Runnable goHome) {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);

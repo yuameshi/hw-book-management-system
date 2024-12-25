@@ -20,19 +20,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateReader {
-	private static JFrame frame;
-	private static JTextField idField;
-	private static JTextField readerNameField;
-	private static JTextField readerTypeCombo;
-	private static JTextField readerSexField;
-	private static JTextField maxBorrowBookCountField;
-	private static JTextField maxBorrowDayCountField;
-	private static JTextField queryIdLabelField;
-	private static JLabel errorLabel;
-	private static JButton saveBtn;
-	private static JButton deleteBtn;
+	private JFrame frame;
+	private JTextField idField;
+	private JTextField readerNameField;
+	private JTextField readerTypeCombo;
+	private JTextField readerSexField;
+	private JTextField maxBorrowBookCountField;
+	private JTextField maxBorrowDayCountField;
+	private JTextField queryIdLabelField;
+	private JLabel errorLabel;
+	private JButton saveBtn;
+	private JButton deleteBtn;
 
-	private static Reader oldReader;
+	private Reader oldReader;
 
 	public UpdateReader(Runnable goHome) {
 		final Font DEFAULT_FONT_20 = new Font(null, Font.PLAIN, 20);

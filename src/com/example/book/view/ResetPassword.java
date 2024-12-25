@@ -12,12 +12,12 @@ import java.awt.event.ActionListener;
 import java.util.function.Consumer;
 
 public class ResetPassword {
-	private static JFrame frame = new JFrame("重置密码");
-	private static int targetUid;
+	private JFrame frame = new JFrame("重置密码");
+	private int targetUid;
 
 	public class ResetPasswordCallbackParam {
-		int uid;
-		String password;
+		private int uid;
+		private String password;
 
 		public ResetPasswordCallbackParam(int uid, String password) {
 			this.uid = uid;
@@ -34,10 +34,10 @@ public class ResetPassword {
 	}
 
 	public ResetPassword(Consumer<ResetPasswordCallbackParam> callback, Runnable goMain) {
-		Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
-		Color WHITE = Color.decode("#ffffff");
-		Color BLACK = Color.decode("#1b1b1b");
-		Color GRAY = Color.decode("#737674");
+		final Font DEFAULT_FONT = new Font(null, Font.PLAIN, 24);
+		final Color WHITE = Color.decode("#ffffff");
+		final Color BLACK = Color.decode("#1b1b1b");
+		final Color GRAY = Color.decode("#737674");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 250);
