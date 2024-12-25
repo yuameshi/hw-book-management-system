@@ -21,7 +21,7 @@ public class Main {
 	public Main(
 			Runnable openAddBookFrame, Runnable openUpdateBookFrame,
 			Runnable openAddReaderFrame, Runnable openUpdateReaderFrame,
-			Runnable openBookQueryFrame,
+			Runnable openBookQueryFrame, Runnable openReaderQueryFrame,
 			Runnable resetPasswordTrigger, Runnable closeHandler) {
 		frame = new JFrame("图书管理系统");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +36,7 @@ public class Main {
 		basicManageMenu = getBasicManagement(openAddBookFrame, openUpdateBookFrame,
 				openAddReaderFrame, openUpdateReaderFrame);
 		borrowMenu = getBorrowManagement();
-		JMenu queryManageMenu = getQueryManagement(openBookQueryFrame);
+		JMenu queryManageMenu = getQueryManagement(openBookQueryFrame, openReaderQueryFrame);
 		JMenu systemManageMenu = getSystemManagement(resetPasswordTrigger, closeHandler);
 		menuBar.add(basicManageMenu);
 		menuBar.add(borrowMenu);
@@ -118,7 +118,7 @@ public class Main {
 		return borrowManageMenu;
 	}
 
-	private JMenu getQueryManagement(Runnable openBookQueryFrame) {
+	private JMenu getQueryManagement(Runnable openBookQueryFrame, Runnable openReaderQueryFrame) {
 		JMenu queryManageMenu = new JMenu("查询管理");
 		JMenuItem bookQuery = new JMenuItem("图书查询");
 		bookQuery.addActionListener(new ActionListener() {
@@ -130,6 +130,12 @@ public class Main {
 		queryManageMenu.add(bookQuery);
 
 		JMenuItem readerQuery = new JMenuItem("读者查询");
+		readerQuery.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openReaderQueryFrame.run();
+			}
+		});
 		queryManageMenu.add(readerQuery);
 		return queryManageMenu;
 	}
