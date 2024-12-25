@@ -93,15 +93,15 @@ public class Reader {
 		this.maxBorrowCount = maxBorrowCount;
 	}
 
-	public int getMaxBorrowCount() {
-		return maxBorrowCount;
+	public Integer getMaxBorrowCount() {
+		return Integer.valueOf(maxBorrowCount);
 	}
 
 	public void setMaxBorrowDayCount(int maxBorrowDayCount) {
 		this.maxBorrowDayCount = maxBorrowDayCount;
 	}
 
-	public int getMaxBorrowDayCount() {
-		return maxBorrowDayCount;
+	public Integer getMaxBorrowDayCount() {
+		return Integer.valueOf(maxBorrowDayCount);
 	}
 }
