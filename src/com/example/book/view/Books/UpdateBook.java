@@ -46,7 +46,7 @@ public class UpdateBook {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
-		frame = new JFrame("添加图书");
+		frame = new JFrame("修改/删除图书");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(750, 450);
 		frame.setResizable(false);
