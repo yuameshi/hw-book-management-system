@@ -81,6 +81,7 @@ $ jar -cvfm BookManagementSystem.jar MANIFEST.MF -C bin .
 
 # 运行指南：
 
+0. 若使用预构建的 Jar 包，请将其重命名为`BookManagementSystem.jar`或者修改下方命令中的文件名
 1. 启动 MySQL 服务器 并创建好实训指导书中的数据库 (亦可通过根目录中的`create-db.sql`文件创建)
 2. 确保`druid.properties`文件配置正确并和`BookManagementSystem.jar`在同一目录下
 3. 在根目录下执行以下命令以运行 Jar 包
