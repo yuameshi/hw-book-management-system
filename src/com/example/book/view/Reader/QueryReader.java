@@ -15,6 +15,8 @@ import com.example.book.view.alerts.DbNotRunning;
 import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class QueryReader {
 	private JFrame frame;
@@ -32,7 +34,12 @@ public class QueryReader {
 		final Color GRAY = Color.decode("#737674");
 
 		frame = new JFrame("读者查询");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				close();
+				goMainHandler.run();
+			}
+		});
 		frame.setSize(820, 800);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);

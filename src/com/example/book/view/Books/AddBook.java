@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.regex.Pattern;
 
 public class AddBook {
@@ -39,7 +41,12 @@ public class AddBook {
 		final Color GRAY = Color.decode("#737674");
 
 		frame = new JFrame("添加图书");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				close();
+				goHome.run();
+			}
+		});
 		frame.setResizable(false);
 		frame.setSize(750, 400);
 		frame.setLocationRelativeTo(null);

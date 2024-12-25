@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.function.Consumer;
 
 public class LoginDialog {
-	private JFrame frame = new JFrame("登录");
+	private JFrame frame;
 	private JTextField unameField;
 	private JPasswordField passwordField;
 	private JLabel errorMsg;
@@ -42,6 +42,7 @@ public class LoginDialog {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
+		frame = new JFrame("登录");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400, 250);
 		frame.setLocationRelativeTo(null);

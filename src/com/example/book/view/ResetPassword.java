@@ -9,10 +9,12 @@ import javax.swing.JButton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.function.Consumer;
 
 public class ResetPassword {
-	private JFrame frame = new JFrame("重置密码");
+	private JFrame frame;
 	private int targetUid;
 
 	public class ResetPasswordCallbackParam {
@@ -39,7 +41,13 @@ public class ResetPassword {
 		final Color BLACK = Color.decode("#1b1b1b");
 		final Color GRAY = Color.decode("#737674");
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame = new JFrame("重置密码");
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				hide();
+				goMain.run();
+			}
+		});
 		frame.setSize(400, 250);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
