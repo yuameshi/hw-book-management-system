@@ -55,4 +55,29 @@ public class Query {
 		Utils.CloseConnection(result, statement, connection);
 		return books;
 	}
+
+	public static Reader[] getAllReaders() throws SQLException {
+		Connection connection = Utils.getConnection();
+		Statement statement = connection.createStatement();
+		ResultSet rowCountQuery = statement
+				.executeQuery("SELECT COUNT(*) totalCount FROM `bookdb`.`reader`;");
+		int rowCount = 999;
+		if (rowCountQuery.next()) {
+			rowCount = rowCountQuery.getInt("totalCount");
+		}
+		Reader[] books = new Reader[rowCount];
+		ResultSet result = Utils.Query("SELECT * FROM `bookdb`.`reader`;",
+				statement);
+		while (result.next()) {
+			Reader.ReaderBuilder builder = new Reader.ReaderBuilder(result.getString("id"));
+			builder.withName(result.getString("readername"));
+			builder.withCategory(result.getString("readertype"));
+			builder.withGender(result.getString("sex"));
+			builder.withMaxBorrowCount(Integer.valueOf(result.getString("max_num")));
+			builder.withMaxBorrowDayCount(Integer.valueOf(result.getString("days_num")));
+			books[result.getRow() - 1] = builder.build();
+		}
+		Utils.CloseConnection(result, statement, connection);
+		return books;
+	}
 }
