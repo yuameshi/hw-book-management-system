@@ -11,7 +11,7 @@ public class Reader {
 	public Reader() {
 	}
 
-	public class ReaderBuilder {
+	public static class ReaderBuilder {
 		private String id;
 		private String name;
 		private String category = "普通读者";
