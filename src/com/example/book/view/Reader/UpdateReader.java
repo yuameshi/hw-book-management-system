@@ -8,8 +8,10 @@ import javax.swing.JTextField;
 
 import com.example.book.controller.Reader;
 import com.example.book.db.readers.Query;
+import com.example.book.db.readers.Update;
 import com.example.book.db.readers.Delete;
 import com.example.book.view.alerts.DbNotRunning;
+import com.example.book.view.alerts.Reader.SuccessUpdate;
 import com.example.book.view.alerts.Reader.SuccessDelete;
 
 import java.awt.Color;
@@ -127,7 +129,7 @@ public class UpdateReader {
 		panel.add(maxBorrowDayCountField);
 
 		errorLabel = new JLabel("");
-		errorLabel.setBounds(400, 180, 300, 30);
+		errorLabel.setBounds(380, 180, 300, 30);
 		errorLabel.setFont(DEFAULT_FONT_20);
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setVisible(false);
@@ -260,6 +262,43 @@ public class UpdateReader {
 	}
 
 	private void save() {
+		String id = idField.getText();
+		String name = readerNameField.getText();
+		String category = readerTypeCombo.getText();
+		String gender = readerSexField.getText();
+		String maxBorrowBookCount = maxBorrowBookCountField.getText();
+		String maxBorrowDayCount = maxBorrowDayCountField.getText();
+		try {
+			Reader.ReaderBuilder readerBuilder = new Reader.ReaderBuilder(id);
+			if (!name.isEmpty())
+				readerBuilder = readerBuilder.withName(name);
+			if (!category.isEmpty())
+				readerBuilder = readerBuilder.withCategory(category);
+			if (!gender.isEmpty())
+				readerBuilder = readerBuilder.withGender(gender);
+			if (!maxBorrowBookCount.isEmpty())
+				readerBuilder = readerBuilder.withMaxBorrowCount(Integer.valueOf(maxBorrowBookCount));
+			if (!maxBorrowDayCount.isEmpty())
+				readerBuilder = readerBuilder.withMaxBorrowDayCount(Integer.valueOf(maxBorrowDayCount));
+
+			try {
+				Reader newReader = readerBuilder.build();
+				Update.update(oldReader, newReader);
+				oldReader = newReader;
+			} catch (Exception e) {
+				errorLabel.setText("读者信息更新失败");
+				errorLabel.setVisible(true);
+				e.printStackTrace();
+				return;
+			}
+			SuccessUpdate.show();
+		} catch (Exception e) {
+			DbNotRunning.show((Integer i) -> {
+				// System.exit(1);
+			});
+			e.printStackTrace();
+			return;
+		}
 	}
 
 	public void show() {
@@ -274,8 +313,4 @@ public class UpdateReader {
 		frame.setVisible(false);
 	}
 
-	public static void main(String[] args) {
-		new UpdateReader(() -> {
-		}).show();
-	}
 }
