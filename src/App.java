@@ -10,6 +10,7 @@ import com.example.book.view.Books.QueryBook;
 import com.example.book.view.Books.UpdateBook;
 import com.example.book.view.LoginDialog;
 import com.example.book.view.LoginDialog.LoginObject;
+import com.example.book.view.Reader.AddReader;
 import com.example.book.view.ResetPassword.ResetPasswordCallbackParam;
 import com.example.book.view.alerts.DbNotRunning;
 import com.example.book.view.alerts.UnexpectedError;
@@ -24,6 +25,7 @@ public class App {
 	private static QueryBook QueryBookFrame;
 	private static Main MainFrame;
 	private static ResetPassword ResetPasswordDialog;
+	private static AddReader AddReaderFrame;
 
 	private static void handleLogin(LoginObject loginObject) {
 		try {
@@ -89,6 +91,11 @@ public class App {
 		QueryBookFrame.show();
 	}
 
+	private static void handleOpenAddReader() {
+		MainFrame.hide();
+		AddReaderFrame.show();
+	}
+
 	public static void main(String[] args) throws Exception {
 		try {
 			PortTester tester = new PortTester();
@@ -100,12 +107,14 @@ public class App {
 				ResetPasswordDialog = new ResetPassword(App::handleResetPasswordCallback, App::handleOpenMain);
 				MainFrame = new Main(
 						App::openAddBookFrame, App::openUpdateBookFrame,
+						App::handleOpenAddReader,
 						App::handleOpenQueryBook,
 						App::openResetPasswordFrame, App::handleExitSystem);
 				LoginDialog.show();
 				AddBookFrame = new AddBook(App::handleOpenMain);
 				UpdateBookFrame = new UpdateBook(App::handleOpenMain);
 				QueryBookFrame = new QueryBook(App::handleOpenMain);
+				AddReaderFrame = new AddReader(App::handleOpenMain);
 			}
 		} catch (Exception e) {
 			UnexpectedError.show(App::handleExitApp);
