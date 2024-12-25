@@ -1,13 +1,15 @@
 package com.example.book.controller;
 
+import java.util.regex.Pattern;
+
 public class Book {
-	private String id;
-	private String bookName;
+	private String id = "";
+	private String bookName = "";
 	private String category = "科技";
-	private String author;
-	private String translator;
-	private String publisher;
-	private String publishTime;
+	private String author = "";
+	private String translator = "";
+	private String publisher = "";
+	private String publishTime = "";
 	private float price = 28;
 	private int stock = 1;
 
@@ -15,13 +17,13 @@ public class Book {
 	}
 
 	public static class BookBuilder {
-		private String id;
-		private String bookName;
+		private String id = "";
+		private String bookName = "";
 		private String category = "科技";
-		private String author;
-		private String translator;
-		private String publisher;
-		private String publishTime;
+		private String author = "";
+		private String translator = "";
+		private String publisher = "";
+		private String publishTime = "";
 		private float price = 28;
 		private int stock = 1;
 
@@ -30,42 +32,50 @@ public class Book {
 		}
 
 		public BookBuilder withName(String name) {
-			this.bookName = name;
+			if (name != null)
+				this.bookName = name;
 			return this;
 		}
 
 		public BookBuilder withAuthor(String author) {
-			this.author = author;
+			if (author != null)
+				this.author = author;
 			return this;
 		}
 
 		public BookBuilder withTranslator(String translator) {
-			this.translator = translator;
+			if (translator != null)
+				this.translator = translator;
 			return this;
 		}
 
 		public BookBuilder withCategory(String category) {
-			this.category = category;
+			if (category != null)
+				this.category = category;
 			return this;
 		}
 
 		public BookBuilder withPublishTime(String pubTime) {
-			this.publishTime = pubTime;
+			if (pubTime != null)
+				this.publishTime = pubTime;
 			return this;
 		}
 
 		public BookBuilder withPublisher(String pub) {
-			this.publisher = pub;
+			if (pub != null)
+				this.publisher = pub;
 			return this;
 		}
 
 		public BookBuilder withPrice(float price) {
-			this.price = price;
+			if (price >= 0)
+				this.price = price;
 			return this;
 		}
 
 		public BookBuilder withStock(int stock) {
-			this.stock = stock;
+			if (stock >= 0)
+				this.stock = stock;
 			return this;
 		}
 
@@ -85,74 +95,105 @@ public class Book {
 	}
 
 	public String getId() {
+		if (id == null)
+			return "";
 		return id;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		if (id != null)
+			this.id = id;
 	}
 
 	public String getBookName() {
+		if (bookName == null)
+			return "";
 		return bookName;
 	}
 
 	public void setBookName(String bookName) {
-		this.bookName = bookName;
+		if (bookName != null)
+			this.bookName = bookName;
 	}
 
 	public String getCategory() {
+		if (category == null)
+			return "";
 		return category;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		if (category != null)
+			this.category = category;
 	}
 
 	public String getAuthor() {
+		if (author == null)
+			return "";
 		return author;
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		if (author != null)
+			this.author = author;
 	}
 
 	public String getTranslator() {
+		if (translator == null)
+			return "";
 		return translator;
 	}
 
 	public void setTranslator(String translator) {
-		this.translator = translator;
+		if (translator != null)
+			this.translator = translator;
 	}
 
 	public String getPublisher() {
+		if (publisher == null)
+			return "";
 		return publisher;
 	}
 
 	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+		if (publisher != null)
+			this.publisher = publisher;
 	}
 
 	public String getPublishTime() {
+		if (publishTime == null)
+			return "";
 		return publishTime;
 	}
 
 	public void setPublishTime(String publishTime) {
-		this.publishTime = publishTime;
+		if (publishTime != null) {
+			if (Pattern.matches("\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}", publishTime))
+				this.publishTime = publishTime;
+			else
+				throw new IllegalArgumentException("Invalid publish time format, should be yyyy-MM-dd HH:mm:ss");
+		}
 	}
 
 	public float getPrice() {
+		if (price < 0)
+			return 0;
 		return price;
 	}
 
 	public void setPrice(float price) {
-		this.price = price;
+		if (price >= 0)
+			this.price = price;
 	}
 
 	public int getStock() {
+		if (stock < 0)
+			return 0;
 		return stock;
 	}
 
 	public void setStock(int stock) {
-		this.stock = stock;
+		if (stock >= 0)
+			this.stock = stock;
 	}
 }
