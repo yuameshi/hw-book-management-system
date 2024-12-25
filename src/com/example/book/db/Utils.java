@@ -15,7 +15,7 @@ public class Utils {
 	static {
 		try {
 			Properties prop = new Properties();
-			prop.load(new FileInputStream("src/druid.properties"));
+			prop.load(new FileInputStream("druid.properties"));
 			dataSource = DruidDataSourceFactory.createDataSource(prop);
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to initialize druid connection pool.");
