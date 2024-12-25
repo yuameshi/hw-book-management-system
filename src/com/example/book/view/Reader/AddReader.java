@@ -190,13 +190,13 @@ public class AddReader {
 			if (!gender.isEmpty())
 				readerBuilder.withGender(gender);
 			if (!maxBorrowBookCount.isEmpty())
-				readerBuilder.withMaxBorrowCount(maxBorrowBookCount);
+				readerBuilder.withMaxBorrowCount(Integer.valueOf(maxBorrowBookCount));
 			if (!maxBorrowDayCount.isEmpty())
-				readerBuilder.withMaxBorrowDayCount(maxBorrowDayCount);
+				readerBuilder.withMaxBorrowDayCount(Integer.valueOf(maxBorrowDayCount));
 			try {
 				Add.add(readerBuilder.build());
 			} catch (Exception e) {
-				errorLabel.setText("读者编号已存在");
+				errorLabel.setText("出现未知错误，检查您的输入");
 				errorLabel.setVisible(true);
 				e.printStackTrace();
 				return;

@@ -5,8 +5,8 @@ public class Reader {
 	private String name;
 	private String category = "普通读者";
 	private String gender;
-	private String maxBorrowCount;
-	private String maxBorrowDayCount;
+	private int maxBorrowCount;
+	private int maxBorrowDayCount;
 
 	public Reader() {
 	}
@@ -16,8 +16,8 @@ public class Reader {
 		private String name;
 		private String category = "普通读者";
 		private String gender;
-		private String maxBorrowCount;
-		private String maxBorrowDayCount;
+		private int maxBorrowCount;
+		private int maxBorrowDayCount;
 
 		public ReaderBuilder(String id) {
 			this.id = id;
@@ -38,12 +38,12 @@ public class Reader {
 			return this;
 		}
 
-		public ReaderBuilder withMaxBorrowCount(String maxBorrowCount) {
+		public ReaderBuilder withMaxBorrowCount(int maxBorrowCount) {
 			this.maxBorrowCount = maxBorrowCount;
 			return this;
 		}
 
-		public ReaderBuilder withMaxBorrowDayCount(String maxBorrowDayCount) {
+		public ReaderBuilder withMaxBorrowDayCount(int maxBorrowDayCount) {
 			this.maxBorrowDayCount = maxBorrowDayCount;
 			return this;
 		}
@@ -89,19 +89,19 @@ public class Reader {
 		return gender;
 	}
 
-	public void setMaxBorrowCount(String maxBorrowCount) {
+	public void setMaxBorrowCount(int maxBorrowCount) {
 		this.maxBorrowCount = maxBorrowCount;
 	}
 
-	public String getMaxBorrowCount() {
+	public int getMaxBorrowCount() {
 		return maxBorrowCount;
 	}
 
-	public void setMaxBorrowDayCount(String maxBorrowDayCount) {
+	public void setMaxBorrowDayCount(int maxBorrowDayCount) {
 		this.maxBorrowDayCount = maxBorrowDayCount;
 	}
 
-	public String getMaxBorrowDayCount() {
+	public int getMaxBorrowDayCount() {
 		return maxBorrowDayCount;
 	}
 }

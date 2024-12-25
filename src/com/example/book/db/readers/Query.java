@@ -19,8 +19,8 @@ public class Query {
 			builder.withName(result.getString("readername"));
 			builder.withCategory(result.getString("readertype"));
 			builder.withGender(result.getString("sex"));
-			builder.withMaxBorrowCount(result.getString("max_num"));
-			builder.withMaxBorrowDayCount(result.getString("days_num"));
+			builder.withMaxBorrowCount(Integer.valueOf(result.getString("max_num")));
+			builder.withMaxBorrowDayCount(Integer.valueOf(result.getString("days_num")));
 			Utils.CloseConnection(null, statement, connection);
 			return builder.build();
 		} else {
